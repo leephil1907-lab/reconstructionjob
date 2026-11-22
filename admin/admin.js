@@ -179,7 +179,11 @@
       body: JSON.stringify({email: email, password: password})
     }).then(function(res){ return res.json().then(function(body){ return {ok: res.ok, body: body}; }); })
       .then(function(r){
-        if(!r.ok) throw new Error((r.body && (r.body.msg || r.body.error_description || r.body.message)) || 'Sign-in failed');
+        if(!r.ok){
+          var raw = (r.body && (r.body.msg || r.body.error_description || r.body.message)) || '';
+          var msg = /invalid/i.test(raw) ? 'That email and password don\'t match our records. Check the details, or contact the site owner for a reset.' : (raw || 'Sign-in failed — please try again.');
+          throw new Error(msg);
+        }
         saveSession({
           access_token: r.body.access_token,
           refresh_token: r.body.refresh_token,
@@ -193,7 +197,13 @@
         toast('Signed in');
       })
       .catch(function(ex){
-        err.textContent = ex.message === 'Failed to fetch' ? 'Network error — check your connection.' : 'Could not sign in. Check your email and password.';
+        if(ex && /network|failed to fetch/i.test(ex.message || '')){
+          err.textContent = 'Network error — check your connection and try again.';
+        } else if(ex && ex.message && !/sign-in failed/i.test(ex.message)){
+          err.textContent = ex.message;
+        } else {
+          err.textContent = 'Could not sign in. Check your email and password.';
+        }
         err.hidden = false;
       })
       .finally(function(){

@@ -17,19 +17,58 @@
 
 <!-- ============ LOGIN VIEW ============ -->
 <div id="loginView" class="login">
-  <form id="loginForm" class="login__card" autocomplete="on">
-    <svg class="login__sigil" viewBox="0 0 64 64" role="img" aria-label="The Reconstruction Company"><rect width="64" height="64" rx="10" fill="#141414"/><text x="32" y="30" text-anchor="middle" dominant-baseline="central" font-family="Georgia,Times New Roman,serif" font-size="24" letter-spacing="1.5" fill="#f5f2ea">RC</text><rect x="13" y="43" width="38" height="3.4" fill="#b98d2e"/></svg>
-    <p class="login__eyebrow">Restricted area</p>
-    <h1 class="login__title">The Reconstruction<br>Company</h1>
-    <p class="login__sub">Admin Console — authorised personnel only.</p>
-    <label class="login__label" for="loginEmail">Email</label>
-    <input id="loginEmail" class="login__input" type="email" required autocomplete="username" placeholder="buildwithbruno@hotmail.com">
-    <label class="login__label" for="loginPassword">Password</label>
-    <input id="loginPassword" class="login__input" type="password" required autocomplete="current-password" placeholder="••••••••••••••••">
-    <p id="loginError" class="login__error" role="alert" hidden></p>
-    <button type="submit" id="loginBtn" class="login__btn"><span class="login__btn-label">Sign in</span></button>
-    <p class="login__foot">This console is not linked from the public site. Activity here is yours alone.</p>
-  </form>
+  <div class="login__split">
+
+    <aside class="login__editorial" aria-hidden="true">
+      <img class="login__lockup" src="../assets/img/logo-reversed.svg" alt="" width="340" height="72">
+      <p class="login__exhibit">&ldquo;The work of towns begins on the record — every application, every message, every invoice, one desk.&rdquo;</p>
+      <ul class="login__inside">
+        <li><span class="login__inside-ic"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5.3 2.4 12v6a2 2 0 0 0 2 2h15.2a2 2 0 0 0 2-2v-6l-3.1-6.7A2 2 0 0 0 16.8 3.7H7.2a2 2 0 0 0-1.7 1.6Z"/></svg></span><span><b>Submissions inbox</b><small>Every My Town request and guide-access application, triaged.</small></span></li>
+        <li><span class="login__inside-ic"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 6 8.4 8.4 0 0 1-3.8-.9L3 21l1.5-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 6-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5Z"/></svg></span><span><b>Live chat desk</b><small>Visitors write from the site; you answer as the Company.</small></span></li>
+        <li><span class="login__inside-ic"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2.5h8.5L19 7v14a1.5 1.5 0 0 1-1.5 1.5h-12A1.5 1.5 0 0 1 4 21V4a1.5 1.5 0 0 1 1.5-1.5Z"/><path d="M14 2.5V7h4.5"/><path d="M8.5 12.5h7M8.5 16h7"/></svg></span><span><b>Invoices &amp; sent log</b><small>Guide-access billing, branded letters, complete audit trail.</small></span></li>
+      </ul>
+      <div class="login__colophon">
+        <span class="login__rule"></span>
+        <p class="login__private">PRIVATE &amp; INTERNAL — AUTHORISED PERSONNEL ONLY</p>
+        <p class="login__est">EST. 2026 &nbsp;·&nbsp; PUBLIC BENEFIT &nbsp;·&nbsp; REAL ASSETS</p>
+      </div>
+      <div class="login__ghost">RC</div>
+    </aside>
+
+    <form id="loginForm" class="login__card" autocomplete="on">
+      <p class="login__eyebrow">Private console</p>
+      <h1 class="login__title">The Reconstruction<br>Company</h1>
+      <p class="login__sub">Admin Console — the Company&rsquo;s back office.</p>
+      <label class="login__label" for="loginEmail">Email</label>
+      <input id="loginEmail" class="login__input" type="email" required autocomplete="username" placeholder="buildwithbruno@hotmail.com">
+      <label class="login__label" for="loginPassword">Password</label>
+      <div class="login__pass">
+        <input id="loginPassword" class="login__input" type="password" required autocomplete="current-password" placeholder="••••••••••••••••">
+        <button type="button" class="login__toggle" id="loginToggle" aria-label="Show password">
+          <svg class="eye-on" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3.2"/></svg>
+          <svg class="eye-off" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.5 20 20"/><path d="M9.9 5.9A9.8 9.8 0 0 1 12 5.5c6 0 9.5 6.5 9.5 6.5a17 17 0 0 1-2.9 4M6.4 8A16.4 16.4 0 0 0 2.5 12S6 18.5 12 18.5c1.1 0 2.2-.3 3.1-.7"/></svg>
+        </button>
+      </div>
+      <p id="loginError" class="login__error" role="alert" hidden></p>
+      <button type="submit" id="loginBtn" class="login__btn"><span class="login__btn-label">Sign in</span><span class="login__btn-arrow" aria-hidden="true">→</span></button>
+      <p class="login__foot"><svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg> Sessions cap hourly. This console is unlisted — access is by personnel authorisation only.</p>
+    </form>
+  </div>
+
+  <script>
+  (function(){
+    var t = document.getElementById('loginToggle');
+    var p = document.getElementById('loginPassword');
+    if(!t || !p) return;
+    t.addEventListener('click', function(){
+      var show = p.type === 'password';
+      p.type = show ? 'text' : 'password';
+      t.classList.toggle('is-showing', show);
+      t.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+      p.focus();
+    });
+  })();
+  </script>
 </div>
 
 <!-- ============ APP VIEW ============ -->
@@ -68,15 +107,15 @@
     <section class="tab is-active" id="tab-dashboard" aria-labelledby="h-dashboard">
       <header class="pagehead">
         <p class="eyebrow">Overview</p>
-        <h2 id="h-dashboard">Good to see you.</h2>
+        <h2 id="h-dashboard" data-kicker="01 —">Good to see you.</h2>
         <p class="pagehead__sub">Everything submitted to the Company, wired to one desk.</p>
       </header>
 
       <div class="stats" id="dashStats">
-        <article class="stat"><span class="stat__label">New leads</span><b class="stat__num" id="statNewSubs">–</b><span class="stat__hint">Awaiting your review</span></article>
-        <article class="stat"><span class="stat__label">Open chats</span><b class="stat__num" id="statOpenChats">–</b><span class="stat__hint">Visitors waiting on you</span></article>
-        <article class="stat"><span class="stat__label">Outstanding</span><b class="stat__num" id="statOutstanding">–</b><span class="stat__hint">Sent, unpaid invoices</span></article>
-        <article class="stat"><span class="stat__label">Collected</span><b class="stat__num" id="statPaid">–</b><span class="stat__hint">Paid invoices, all time</span></article>
+        <article class="stat"><span class="stat__icon"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5.3 2.4 12v6a2 2 0 0 0 2 2h15.2a2 2 0 0 0 2-2v-6l-3.1-6.7A2 2 0 0 0 16.8 3.7H7.2a2 2 0 0 0-1.7 1.6Z"/></svg></span><span class="stat__label">New leads</span><b class="stat__num" id="statNewSubs">–</b><span class="stat__hint">Awaiting your review</span></article>
+        <article class="stat"><span class="stat__icon"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 6 8.4 8.4 0 0 1-3.8-.9L3 21l1.5-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 6-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5Z"/></svg></span><span class="stat__label">Open chats</span><b class="stat__num" id="statOpenChats">–</b><span class="stat__hint">Visitors waiting on you</span></article>
+        <article class="stat"><span class="stat__icon"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2.5h8.5L19 7v14a1.5 1.5 0 0 1-1.5 1.5h-12A1.5 1.5 0 0 1 4 21V4a1.5 1.5 0 0 1 1.5-1.5Z"/><path d="M14 2.5V7h4.5"/><path d="M8.5 12.5h7M8.5 16h7"/></svg></span><span class="stat__label">Outstanding</span><b class="stat__num" id="statOutstanding">–</b><span class="stat__hint">Sent, unpaid invoices</span></article>
+        <article class="stat"><span class="stat__icon"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 10v.01M18 14v.01"/></svg></span><span class="stat__label">Collected</span><b class="stat__num" id="statPaid">–</b><span class="stat__hint">Paid invoices, all time</span></article>
       </div>
 
       <div class="dash-grid">
@@ -95,7 +134,7 @@
     <section class="tab" id="tab-chat" aria-labelledby="h-chat" hidden>
       <header class="pagehead">
         <p class="eyebrow">Live chat</p>
-        <h2 id="h-chat">The front desk.</h2>
+        <h2 id="h-chat" data-kicker="02 —">The front desk.</h2>
         <p class="pagehead__sub">Visitors chat from the public site; you answer here. Updates automatically.</p>
       </header>
 
@@ -136,7 +175,7 @@
       <header class="pagehead pagehead--row">
         <div>
           <p class="eyebrow">Form inbox</p>
-          <h2 id="h-subs">Submissions.</h2>
+          <h2 id="h-subs" data-kicker="03 —">Submissions.</h2>
           <p class="pagehead__sub">My Town requests and guide-access applications. Nothing is lost; everything is exportable.</p>
         </div>
         <div class="pagehead__tools">
@@ -189,7 +228,7 @@
       <header class="pagehead pagehead--row">
         <div>
           <p class="eyebrow">Guide-access invoices</p>
-          <h2 id="h-inv">Invoice creator.</h2>
+          <h2 id="h-inv" data-kicker="04 —">Invoice creator.</h2>
           <p class="pagehead__sub">Branded, one-click printing. Numbers persist — no duplicates.</p>
         </div>
         <div class="pagehead__tools">
@@ -253,7 +292,7 @@
     <section class="tab" id="tab-email" aria-labelledby="h-email" hidden>
       <header class="pagehead">
         <p class="eyebrow">Correspondence</p>
-        <h2 id="h-email">Email reply.</h2>
+        <h2 id="h-email" data-kicker="05 —">Email reply.</h2>
         <p class="pagehead__sub">Write once — send branded, or copy the branded HTML straight into your mail app. Every send is logged.</p>
       </header>
 
@@ -304,7 +343,7 @@
     <section class="tab" id="tab-settings" aria-labelledby="h-set" hidden>
       <header class="pagehead">
         <p class="eyebrow">Control room</p>
-        <h2 id="h-set">Settings.</h2>
+        <h2 id="h-set" data-kicker="06 —">Settings.</h2>
         <p class="pagehead__sub">Site-wide switches, your account, and your data.</p>
       </header>
 
