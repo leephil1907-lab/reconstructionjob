@@ -272,3 +272,17 @@ body{background:var(--paper);color:var(--ink);font-family:var(--body);-webkit-fo
 .side__link.is-active .sicon svg{opacity:1}
 .side__view-site svg,.linkbtn svg,.btn-ink svg,.btn-ghost svg,.mini-btn svg{width:.95em;height:.95em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.09em;display:inline-block}
 .side__link{display:flex;align-items:center;gap:.6rem}
+
+/* ============ live motion ============ */
+.login__card{animation:loginIn .55s cubic-bezier(.2,.9,.25,1) both}
+@keyframes loginIn{from{opacity:0;transform:translateY(22px) scale(.97)}to{opacity:1;transform:none}}
+.tab.is-active{animation:tabIn .38s var(--ease,ease) both}
+@keyframes tabIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.stat{animation:statIn .45s var(--ease,ease) both}
+.stat:nth-child(2){animation-delay:.06s}
+.stat:nth-child(3){animation-delay:.12s}
+.stat:nth-child(4){animation-delay:.18s}
+@keyframes statIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+#toast.show{animation:toastIn .3s ease}
+@keyframes toastIn{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
+@media (prefers-reduced-motion:reduce){.login__card,.tab.is-active,.stat,#toast.show{animation:none!important}}

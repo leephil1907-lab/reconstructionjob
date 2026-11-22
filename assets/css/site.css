@@ -430,12 +430,8 @@ body::before{
 
 /* wordmark logo lockup */
 .wordmark{flex-direction:row;align-items:center;gap:.6rem}
-.wordmark__sigil{width:36px;height:36px;border-radius:6px;flex:0 0 auto}
-.wordmark__text{display:flex;flex-direction:column;gap:.3rem;line-height:1}
-@media(min-width:640px){.wordmark__sigil{width:44px;height:44px}}
 
 /* colophon (footer) brand mark */
-.colophon__sigil{width:46px;height:46px;border-radius:7px;margin:0 0 1.1rem;display:block;box-shadow:0 4px 16px rgba(0,0,0,.3)}
 
 /* correspondence list icons */
 .colophon li a{display:flex;align-items:center;gap:.5rem}
@@ -487,3 +483,68 @@ body::before{
 .captcha__msg{font-size:.79rem;color:var(--ink-55);margin:.45rem .1rem .05rem;line-height:1.45}
 .captcha__msg.is-error{color:#8a2f1d;font-weight:500}
 .captcha__msg.is-ok{color:var(--ok);font-weight:500}
+
+
+/* ============ brand lockups ============ */
+.brand-logo{height:46px;width:auto;display:block}
+@media(min-width:640px){.brand-logo{height:54px}}
+.colophon__logo{height:56px;width:auto;display:block;margin:0 0 1.15rem}
+@media(min-width:640px){.colophon__logo{height:66px}}
+.colophon__badge{width:16px;height:16px;vertical-align:-2.5px;margin-right:.45rem;border-radius:3.5px}
+
+/* ============ live motion & transitions ============ */
+
+/* hero gold word gets a slow foil shimmer */
+.hero h1 .thin{background:linear-gradient(112deg,#8a6a1c 0%,#b98d2e 24%,#f0d68a 42%,#b98d2e 60%,#8a6a1c 84%);background-size:240% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:foilShimmer 5.2s ease-in-out infinite alternate}
+@keyframes foilShimmer{from{background-position:115% 0}to{background-position:-15% 0}}
+
+/* solid buttons: light sweep on hover */
+.btn{position:relative;overflow:hidden}
+.btn--solid::after{content:"";position:absolute;top:-20%;left:-85%;width:42%;height:140%;background:linear-gradient(100deg,transparent 0%,rgba(245,242,234,.55) 45%,rgba(245,242,234,.05) 60%,transparent 100%);transform:skewX(-20deg);transition:left .7s var(--ease);pointer-events:none}
+.btn--solid:hover::after,.btn--solid:focus-visible::after{left:135%}
+
+/* thesis cards: icon lifts and inverts on hover */
+.thesis article{transition:background .35s var(--ease)}
+.thesis article:hover{background:var(--panel-2,#efece3)}
+.thesis__icon{transition:background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease),transform .3s var(--ease)}
+.thesis article:hover .thesis__icon{background:var(--ink);color:var(--ochre-soft);border-color:var(--ink);transform:translateY(-3px)}
+
+/* territory cards: lift on hover */
+.tcard{transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .3s var(--ease)}
+.tcard:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(20,20,20,.16)}
+
+/* library resource rows: slide + ochre edge on hover */
+.resrc a{position:relative}
+.resrc a::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--ochre);transform:scaleY(0);transform-origin:top;transition:transform .3s var(--ease)}
+.resrc a:hover::before{transform:scaleY(1)}
+.resrc a:hover{padding-left:1.45rem}
+
+/* explore rail: count marker rotates when open */
+.state-item summary .chev{display:inline-block}
+.state-item[open] summary .chev{transform:rotate(45deg);color:var(--ochre-deep)}
+
+/* announcement bar: slides down on arrival */
+.rc-announce{animation:announceIn .5s var(--ease) both;transform-origin:top}
+@keyframes announceIn{from{transform:translateY(-102%);opacity:0}to{transform:translateY(0);opacity:1}}
+
+/* chat FAB: soft ochre heartbeat every few seconds */
+.rc-chat__fab{animation:fabHeartbeat 6.4s ease-in-out 1.8s infinite}
+@keyframes fabHeartbeat{0%,88%,100%{box-shadow:0 10px 30px rgba(20,20,20,.35)}92%{box-shadow:0 10px 30px rgba(20,20,20,.35),0 0 0 10px rgba(185,141,46,.30)}96%{box-shadow:0 10px 30px rgba(20,20,20,.35),0 0 0 3px rgba(185,141,46,.22)}}
+.rc-chat__badge--pop{animation:badgePop .45s cubic-bezier(.2,1.6,.4,1)}
+@keyframes badgePop{0%{transform:scale(.3)}60%{transform:scale(1.55)}100%{transform:scale(1)}}
+
+/* form success: stroke draws itself in */
+.form-success svg circle{stroke-dasharray:64;stroke-dashoffset:64}
+.form-success svg path{stroke-dasharray:30;stroke-dashoffset:30}
+.form-success.show svg circle{animation:strokeDraw .75s var(--ease) .15s forwards}
+.form-success.show svg path{animation:strokeDraw .5s var(--ease) .7s forwards}
+@keyframes strokeDraw{to{stroke-dashoffset:0}}
+
+/* captcha success: gentle confirm pulse */
+.captcha.is-ok .captcha__ok{animation:captchaConfirm .5s var(--ease)}
+@keyframes captchaConfirm{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+
+@media (prefers-reduced-motion:reduce){
+  .hero h1 .thin,.btn--solid::after,.rc-announce,.rc-chat__fab,.rc-chat__badge--pop,.form-success svg circle,.form-success svg path,.captcha.is-ok .captcha__ok,.thesis article,.tcard,.resrc a,.resrc a::before{animation:none!important;transition:none!important}
+  .hero h1 .thin{color:var(--ochre-deep);background:none;-webkit-background-clip:border-box;background-clip:border-box}
+}

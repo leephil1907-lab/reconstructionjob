@@ -320,8 +320,9 @@
 
     regenerate();
 
-    /* test hook: only with ?rcdebug=1 in the URL */
-    if (/[?&]rcdebug=1\b/.test(window.location.search)) {
+    /* test hook: local development hosts only, never on the public site */
+    var isLocalHost = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname);
+    if (isLocalHost && /[?&]rcdebug=1\b/.test(window.location.search)) {
       window.__rcCaptcha = window.__rcCaptcha || {};
       window.__rcCaptcha[form.id] = {
         solve: function () { state.x = state.target; render(); check(); },

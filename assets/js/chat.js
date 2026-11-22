@@ -140,7 +140,13 @@
 
   function setBadge(n, seen){
     var unseen = Math.max(0, n - (seen || 0));
-    if(unseen > 0){ badge.hidden = false; badge.textContent = String(unseen); }
+    if(unseen > 0){
+      badge.hidden = false;
+      badge.textContent = String(unseen);
+      badge.classList.remove('rc-chat__badge--pop');
+      void badge.offsetWidth;
+      badge.classList.add('rc-chat__badge--pop');
+    }
     else { badge.hidden = true; }
   }
 

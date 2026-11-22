@@ -990,6 +990,46 @@
     toast('Opening your mail app…');
   });
 
+  /* one-click send via the send-email Edge Function (needs RESEND_API_KEY secret) */
+  $('#emSendBtn').addEventListener('click', function(){
+    var to = $('#emToEmail').value.trim(), subject = $('#emSubject').value.trim();
+    if(!validEmail(to)){ toast('Enter a valid recipient email'); $('#emToEmail').focus(); return; }
+    if(!subject){ toast('Add a subject'); $('#emSubject').focus(); return; }
+    var bodyText = ($('#emBody').value || '').replace(/\{name\}/g, firstName());
+    var html = buildEmailHtml({subject: subject, body: bodyText});
+    var btn = $('#emSendBtn');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    function fallbackToMailApp(reason){
+      window.location.href = 'mailto:' + encodeURIComponent(to) + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(bodyText);
+      maybeLogEmail();
+      toast(reason + ' — opened your mail app instead');
+    }
+    rest('/functions/v1/send-email', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({to: to, to_name: $('#emToName').value.trim() || null, subject: subject, html: html, text: bodyText, reply_to: CONTACT})
+    }).then(function(res){
+      if(res.ok){
+        toast('Email sent — logged below');
+        maybeLogEmail();
+        return null;
+      }
+      return res.json().catch(function(){ return {}; }).then(function(out){
+        if(res.status === 501){
+          fallbackToMailApp('No mail provider connected yet');
+        } else {
+          fallbackToMailApp('Send failed (' + res.status + (out && out.error ? ': ' + out.error : '') + ')');
+        }
+      });
+    }).catch(function(){
+      fallbackToMailApp('Network error');
+    }).finally(function(){
+      btn.disabled = false;
+      btn.textContent = 'Send now';
+    });
+  });
+
   function copyText(text, okMsg){
     function done(){ toast(okMsg); }
     if(navigator.clipboard && navigator.clipboard.writeText){
