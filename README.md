@@ -39,13 +39,7 @@ Features: dashboard · live chat (reply as the Company, close/reopen/delete) · 
 `assets/js/config.js` holds only browser-safe values (the Supabase **anon** key + project URL). All privileged reads/writes require the admin session; public data is limited to insert-only form leads and security-definer chat RPCs.
 
 ## Email delivery (admin → Email Reply)
-The Email tab composes the branded letter, opens your mail app via `mailto:`, copies HTML/text, and logs to `rc_email_log`. One-click sending runs through the `send-email` Supabase Edge Function (`supabase/functions/send-email`), which is deployed but stays dormant until you add a mail provider:
-
-1. Get an API key — Resend (recommended, free tier) or similar.
-2. In Supabase → Edge Functions → `send-email` → Secrets, set:
-   - `RESEND_API_KEY` — your provider key
-   - `RC_FROM` — a verified sender, e.g. `The Reconstruction Company <hello@yourdomain.com>` (without a verified domain, Resend only delivers to your own account address)
-3. Reload the admin — “Send now” delivers immediately and still logs to the sent log. Without the secret, the button falls back to the mail app and says why.
+The Email tab composes the branded letter, **opens your mail app via `mailto:` (send happens there, with your signature)**, copies the branded HTML/text, and logs to `rc_email_log`. That is the supported flow. A `send-email` Edge Function also exists (`supabase/functions/send-email`) as an optional upgrade — wire a mail provider (e.g. Resend: set `RESEND_API_KEY` and a verified `RC_FROM` sender as function secrets) and “Send now” delivers directly; without secrets it just falls back to the mail app.
 
 ## Correspondence
 buildwithbruno@hotmail.com
