@@ -455,35 +455,75 @@ body::before{
 .tcard i svg{width:.9em;height:.9em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .rc-chat__sigil-mark{width:100%;height:100%;display:block;border-radius:6px}
 
-/* ============ jigsaw puzzle captcha (Bybit-style) ============ */
-.captcha{margin:.4rem 0 1.1rem;border:1px solid var(--hair);background:var(--panel);border-radius:4px;padding:.7rem .7rem .55rem;user-select:none}
-.captcha__stage{position:relative;width:100%;aspect-ratio:264/150;background:#141414;border-radius:3px;overflow:hidden;border:1px solid rgba(20,20,20,.55);transition:box-shadow .25s,border-color .25s}
-.captcha__bg{position:absolute;inset:0;width:100%;height:100%;display:block}
-.captcha__piece{position:absolute;left:0;top:0;filter:drop-shadow(0 3px 6px rgba(0,0,0,.55));transition:opacity .25s}
-.captcha__ok{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(12,20,15,.42);color:#8fe3b0;opacity:0;pointer-events:none;transition:opacity .3s}
-.captcha__ok svg{width:56px;height:56px;stroke-width:2.6}
-.captcha.is-ok .captcha__piece{opacity:0}
-.captcha.is-ok .captcha__ok{opacity:1}
-.captcha.is-ok .captcha__stage{border-color:var(--ok);box-shadow:0 0 0 2px rgba(46,107,79,.45)}
-.captcha.is-fail .captcha__stage{animation:rc-shake .5s}
-@keyframes rc-shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(3px)}30%,50%,70%{transform:translateX(-5px)}40%,60%{transform:translateX(5px)}}
-@media (prefers-reduced-motion:reduce){.captcha.is-fail .captcha__stage{animation:none}}
-.captcha__bar{display:flex;gap:.55rem;align-items:stretch;margin-top:.6rem}
-.captcha__refresh{flex:0 0 44px;border:1px solid var(--hair);background:var(--panel-2,#efece3);border-radius:4px;cursor:pointer;color:var(--ink);display:flex;align-items:center;justify-content:center;transition:border-color .2s,color .2s}
-.captcha__refresh:hover{border-color:var(--ochre);color:var(--ochre-deep)}
-.captcha__refresh:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
-.captcha__track{position:relative;flex:1;height:44px;border:1px solid var(--hair);border-radius:999px;background:var(--paper);overflow:hidden;touch-action:none;cursor:pointer;outline:none;transition:background .25s,border-color .25s}
-.captcha__track:focus-visible{border-color:var(--ochre);box-shadow:0 0 0 3px rgba(185,141,46,.4)}
-.captcha__track-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:600;font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-55);pointer-events:none;padding-left:2.4rem}
-.captcha__thumb{position:absolute;left:2px;top:2px;width:40px;height:40px;border-radius:999px;border:0;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;cursor:grab;box-shadow:0 2px 6px rgba(20,20,20,.35);will-change:transform}
-.captcha__thumb:active{cursor:grabbing}
-.captcha__track.is-ok{background:var(--ok);border-color:var(--ok);cursor:default}
-.captcha__track.is-ok .captcha__track-label{color:rgba(245,242,234,.95);padding-left:0}
-.captcha__track.is-ok .captcha__thumb{background:rgba(0,0,0,.28);cursor:default}
-.captcha__msg{font-size:.79rem;color:var(--ink-55);margin:.45rem .1rem .05rem;line-height:1.45}
-.captcha__msg.is-error{color:#8a2f1d;font-weight:500}
-.captcha__msg.is-ok{color:var(--ok);font-weight:500}
+/* ============ jigsaw puzzle captcha — premium module ============ */
+.captcha{margin:.35rem 0 1.15rem;user-select:none;border:1px solid rgba(20,20,20,.32);border-radius:10px;padding:0;background:linear-gradient(180deg,#fffdf6 0%,#f4f1e6 100%);box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 14px 34px rgba(20,20,20,.14),0 2px 6px rgba(20,20,20,.08);overflow:hidden}
 
+/* head — brand bar */
+.captcha__head{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.55rem .8rem;border-bottom:1px solid rgba(20,20,20,.14);background:linear-gradient(180deg,rgba(20,20,20,.035),transparent)}
+.captcha__brand{display:flex;align-items:center;gap:.55rem;min-width:0}
+.captcha__brand svg{border-radius:6px;flex:0 0 auto;box-shadow:0 1px 3px rgba(20,20,20,.35)}
+.captcha__brand-txt{display:flex;flex-direction:column;gap:.16rem;line-height:1;min-width:0}
+.captcha__brand-txt b{font-family:var(--sans);font-weight:600;font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
+.captcha__brand-txt small{font-family:var(--mono);font-size:.5rem;letter-spacing:.05em;color:var(--ink-55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.captcha__secure{display:flex;align-items:center;gap:.4rem;font-family:var(--sans);font-weight:600;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ochre-deep);border:1px solid rgba(138,109,31,.35);border-radius:999px;padding:.28rem .6rem .28rem .45rem;background:rgba(185,141,46,.08);white-space:nowrap}
+.captcha__secure svg{stroke:#8a6d1f}
+
+/* stage — artwork window */
+.captcha__stage{position:relative;width:100%;aspect-ratio:264/150;background:#0c0a08;overflow:hidden;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(0,0,0,.5);box-shadow:inset 0 0 0 1px rgba(217,164,65,.28);transition:box-shadow .3s}
+.captcha__bg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.captcha__holeglow{position:absolute;border-radius:50%;box-shadow:inset 0 0 10px 4px rgba(0,0,0,.55),0 0 14px 2px rgba(243,217,139,.28);pointer-events:none}
+.captcha__piece{position:absolute;left:0;top:0;filter:drop-shadow(0 4px 8px rgba(0,0,0,.6)) drop-shadow(0 0 12px rgba(243,217,139,.14));transition:opacity .25s;will-change:transform}
+.captcha.is-ok .captcha__piece{opacity:0}
+.captcha.is-ok .captcha__holeglow{opacity:0;transition:opacity .3s}
+
+/* success overlays */
+.captcha__ring{position:absolute;inset:0;margin:auto;width:56px;height:56px;border:2px solid rgba(243,217,139,.95);border-radius:50%;opacity:0;pointer-events:none}
+.captcha.is-ok .captcha__ring{animation:capRing .9s cubic-bezier(.2,.9,.25,1) .05s}
+@keyframes capRing{0%{opacity:.95;transform:scale(.35)}100%{opacity:0;transform:scale(2.6)}}
+.captcha__ok{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,rgba(21,38,28,.25) 0%,rgba(12,20,15,.55) 100%);color:#8fe3b0;opacity:0;pointer-events:none;transition:opacity .3s}
+.captcha__ok svg{width:56px;height:56px;stroke-width:2.4;filter:drop-shadow(0 2px 10px rgba(143,227,176,.35))}
+.captcha.is-ok .captcha__ok{opacity:1}
+.captcha.is-ok .captcha__stage{box-shadow:inset 0 0 0 1px rgba(143,227,176,.5),0 0 0 1px rgba(143,227,176,.35),0 0 30px rgba(47,93,58,.35)}
+.captcha.is-fail .captcha__stage{animation:rc-shake .5s;box-shadow:inset 0 0 0 1px rgba(197,84,48,.8),0 0 22px rgba(160,50,30,.35)}
+@keyframes rc-shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(3px)}30%,50%,70%{transform:translateX(-5px)}40%,60%{transform:translateX(5px)}}
+@media (prefers-reduced-motion:reduce){.captcha.is-fail .captcha__stage{animation:none}.captcha.is-ok .captcha__ring{animation:none;opacity:0}}
+
+/* control bar */
+.captcha__bar{display:flex;gap:.6rem;align-items:stretch;padding:.65rem .65rem .5rem;background:linear-gradient(180deg,transparent,rgba(20,20,20,.05))}
+.captcha__refresh{flex:0 0 46px;border:1px solid rgba(20,20,20,.3);background:#fffdf6;border-radius:8px;cursor:pointer;color:#3a3a3a;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 2px rgba(20,20,20,.12);transition:border-color .25s,color .25s,box-shadow .25s,transform .15s}
+.captcha__refresh:hover{border-color:var(--ochre);color:var(--ochre-deep);box-shadow:0 1px 2px rgba(20,20,20,.12),0 0 0 3px rgba(185,141,46,.18)}
+.captcha__refresh:active{transform:scale(.94)}
+.captcha__refresh:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+.captcha__refresh.is-spin svg{animation:capSpin .6s var(--ease)}
+@keyframes capSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.captcha__refresh.is-spin svg{animation:none}}
+
+/* slider track — engraved pill with progress fill and sheen */
+.captcha__track{position:relative;flex:1;height:46px;border-radius:999px;border:1px solid rgba(20,20,20,.32);background:linear-gradient(180deg,#e9e6da 0%,#dedbcd 100%);box-shadow:inset 0 2px 4px rgba(20,20,20,.28),inset 0 -1px 0 rgba(255,255,255,.65);overflow:hidden;touch-action:none;cursor:pointer;outline:none;transition:border-color .25s,box-shadow .25s}
+.captcha__track:focus-visible{border-color:var(--ochre);box-shadow:inset 0 2px 4px rgba(20,20,20,.28),0 0 0 3px rgba(185,141,46,.4)}
+.captcha__fill{position:absolute;left:0;top:0;bottom:0;width:0%;background:linear-gradient(90deg,rgba(185,141,46,.0),rgba(185,141,46,.4) 35%,rgba(217,198,132,.75));border-right:1px solid rgba(138,109,31,.6);pointer-events:none;transition:width .06s linear}
+.captcha__sheen{position:absolute;top:-25%;left:-70%;width:38%;height:150%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.65) 45%,transparent);transform:skewX(-20deg);animation:capSheen 2.8s ease-in-out infinite;pointer-events:none}
+@keyframes capSheen{0%,55%{left:-70%}100%{left:135%}}
+@media (prefers-reduced-motion:reduce){.captcha__sheen{animation:none;opacity:0}}
+.captcha__track-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:600;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(20,20,20,.52);text-shadow:0 1px 0 rgba(255,255,255,.6);pointer-events:none;padding-left:2.4rem}
+.captcha__thumb{position:absolute;left:2px;top:2px;width:42px;height:42px;border-radius:50%;background:radial-gradient(circle at 34% 30%,#3d3d3d 0%,#141414 62%);color:#f3d98b;display:flex;align-items:center;justify-content:center;cursor:grab;box-shadow:0 2px 5px rgba(0,0,0,.5),inset 0 1px 1px rgba(255,255,255,.22),0 0 0 1px rgba(243,217,139,.35);will-change:transform;transition:box-shadow .25s}
+.captcha__thumb:hover{box-shadow:0 2px 6px rgba(0,0,0,.5),inset 0 1px 1px rgba(255,255,255,.25),0 0 0 4px rgba(185,141,46,.35),0 0 18px rgba(217,164,65,.4)}
+.captcha__thumb:active{cursor:grabbing}
+.captcha__track.is-ok{background:linear-gradient(180deg,#2f5d3a,#24482c);border-color:#1f4a30;cursor:default;box-shadow:inset 0 2px 4px rgba(0,0,0,.4)}
+.captcha__track.is-ok .captcha__sheen,.captcha__track.is-ok .captcha__fill{opacity:0}
+.captcha__track.is-ok .captcha__track-label{color:#eaf3e6;text-shadow:none;padding-left:0;letter-spacing:.34em}
+.captcha__track.is-ok .captcha__thumb{background:radial-gradient(circle at 34% 30%,#3a6b48 0%,#1f4a30 65%);color:#eaf3e6;cursor:default;box-shadow:0 2px 5px rgba(0,0,0,.4),inset 0 1px 1px rgba(255,255,255,.25),0 0 0 1px rgba(234,243,230,.35),0 0 16px rgba(143,227,176,.35)}
+
+/* foot — assurance + ephemeral ref */
+.captcha__foot{display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:.3rem .8rem .5rem;border-top:1px solid rgba(20,20,20,.08)}
+.captcha__foot-l{display:flex;align-items:center;gap:.4rem;font-family:var(--body);font-size:.6rem;color:var(--ink-55)}
+.captcha__foot-l svg{stroke:#5c5340;flex:0 0 auto}
+.captcha__seed{font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;color:var(--ink-38)}
+
+/* status line */
+.captcha__msg{font-size:.78rem;color:var(--ink-55);margin:.05rem .75rem .6rem;line-height:1.45;min-height:1.1em}
+.captcha__msg.is-error{color:#8a2f1d;font-weight:600}
+.captcha__msg.is-ok{color:var(--ok);font-weight:600}
 
 /* ============ brand lockups ============ */
 .brand-logo{height:46px;width:auto;display:block}
