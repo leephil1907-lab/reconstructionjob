@@ -548,3 +548,12 @@ body::before{
   .hero h1 .thin,.btn--solid::after,.rc-announce,.rc-chat__fab,.rc-chat__badge--pop,.form-success svg circle,.form-success svg path,.captcha.is-ok .captcha__ok,.thesis article,.tcard,.resrc a,.resrc a::before{animation:none!important;transition:none!important}
   .hero h1 .thin{color:var(--ochre-deep);background:none;-webkit-background-clip:border-box;background-clip:border-box}
 }
+
+/* colophon flag patch */
+.colophon__patch{display:flex;align-items:center;gap:.85rem;margin-top:1.3rem;padding-top:1.1rem;border-top:1px solid rgba(245,242,234,.15);max-width:24rem}
+.colophon__patch img{width:72px;height:72px;border-radius:50%;flex:0 0 auto;box-shadow:0 0 0 1px rgba(245,242,234,.22),0 8px 22px rgba(0,0,0,.5);transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.colophon__patch img:hover{transform:scale(1.07) rotate(-2deg);box-shadow:0 0 0 1px rgba(245,242,234,.3),0 10px 26px rgba(0,0,0,.55),0 0 22px rgba(185,141,46,.25)}
+.colophon__patch-tag{display:flex;flex-direction:column;gap:.34rem;line-height:1}
+.colophon__patch-tag b{font-family:var(--sans);font-weight:600;font-size:.66rem;letter-spacing:.34em;color:var(--ochre-soft);text-transform:uppercase}
+.colophon__patch-tag small{font-family:var(--sans);font-weight:500;font-size:.5rem;letter-spacing:.26em;color:rgba(245,242,234,.5);text-transform:uppercase}
+@media (prefers-reduced-motion:reduce){.colophon__patch img{transition:none!important}}
