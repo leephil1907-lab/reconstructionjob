@@ -9,7 +9,7 @@
   var CFG = window.RC_CONFIG || {};
   var API = (CFG.supabaseUrl || '').replace(/\/$/, '');
   var ANON = CFG.publishableKey || '';
-  var CONTACT = CFG.contactEmail || 'reconstructionusa@proton.me';
+  var CONTACT = CFG.contactEmail || 'buildwithbruno@hotmail.com';
   var SESSION_KEY = 'rc_admin_session';
 
   /* ---------- helpers ---------- */

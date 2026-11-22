@@ -421,3 +421,69 @@ body::before{
 @media print{.rc-chat__fab,.rc-chat__panel,.rc-announce{display:none !important}}
 
 [hidden]{display:none !important}
+
+/* ============ icon system (inline SVG) ============ */
+.ic{width:.85em;height:.85em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.07em;display:inline-block}
+.arr{display:inline-flex;align-items:center}
+.arr svg{width:.85em;height:.85em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.dia{display:inline-block;width:.58em;height:.58em;color:var(--ochre);vertical-align:-.02em;margin-right:.3em}
+
+/* wordmark logo lockup */
+.wordmark{flex-direction:row;align-items:center;gap:.6rem}
+.wordmark__sigil{width:36px;height:36px;border-radius:6px;flex:0 0 auto}
+.wordmark__text{display:flex;flex-direction:column;gap:.3rem;line-height:1}
+@media(min-width:640px){.wordmark__sigil{width:44px;height:44px}}
+
+/* colophon (footer) brand mark */
+.colophon__sigil{width:46px;height:46px;border-radius:7px;margin:0 0 1.1rem;display:block;box-shadow:0 4px 16px rgba(0,0,0,.3)}
+
+/* correspondence list icons */
+.colophon li a{display:flex;align-items:center;gap:.5rem}
+.corr-ic{display:inline-flex;flex:0 0 auto}
+.corr-ic svg{width:.95em;height:.95em;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;opacity:.75}
+
+/* do / don't lists */
+.li-icon{display:flex;gap:.55rem;align-items:flex-start}
+.li-icon svg{width:1.02em;height:1.02em;flex:0 0 auto;margin-top:.17em;fill:none;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+.li-ok svg{color:var(--ok)}
+.li-no svg{color:#8a2f1d}
+
+/* thesis pillar icons */
+.thesis__icon{display:inline-flex;width:37px;height:37px;border:1px solid var(--hair);background:var(--panel);border-radius:2px;align-items:center;justify-content:center;color:var(--ochre-deep);margin:0 0 .85rem}
+.thesis__icon svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+
+/* JS-template arrows */
+.side-arrow{display:inline-flex;align-items:center}
+.side-arrow svg,.td-arrow svg{width:.9em;height:.9em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.td-arrow{display:inline-flex}
+.tcard i svg{width:.9em;height:.9em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.rc-chat__sigil-mark{width:100%;height:100%;display:block;border-radius:6px}
+
+/* ============ jigsaw puzzle captcha (Bybit-style) ============ */
+.captcha{margin:.4rem 0 1.1rem;border:1px solid var(--hair);background:var(--panel);border-radius:4px;padding:.7rem .7rem .55rem;user-select:none}
+.captcha__stage{position:relative;width:100%;aspect-ratio:264/150;background:#141414;border-radius:3px;overflow:hidden;border:1px solid rgba(20,20,20,.55);transition:box-shadow .25s,border-color .25s}
+.captcha__bg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.captcha__piece{position:absolute;left:0;top:0;filter:drop-shadow(0 3px 6px rgba(0,0,0,.55));transition:opacity .25s}
+.captcha__ok{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(12,20,15,.42);color:#8fe3b0;opacity:0;pointer-events:none;transition:opacity .3s}
+.captcha__ok svg{width:56px;height:56px;stroke-width:2.6}
+.captcha.is-ok .captcha__piece{opacity:0}
+.captcha.is-ok .captcha__ok{opacity:1}
+.captcha.is-ok .captcha__stage{border-color:var(--ok);box-shadow:0 0 0 2px rgba(46,107,79,.45)}
+.captcha.is-fail .captcha__stage{animation:rc-shake .5s}
+@keyframes rc-shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(3px)}30%,50%,70%{transform:translateX(-5px)}40%,60%{transform:translateX(5px)}}
+@media (prefers-reduced-motion:reduce){.captcha.is-fail .captcha__stage{animation:none}}
+.captcha__bar{display:flex;gap:.55rem;align-items:stretch;margin-top:.6rem}
+.captcha__refresh{flex:0 0 44px;border:1px solid var(--hair);background:var(--panel-2,#efece3);border-radius:4px;cursor:pointer;color:var(--ink);display:flex;align-items:center;justify-content:center;transition:border-color .2s,color .2s}
+.captcha__refresh:hover{border-color:var(--ochre);color:var(--ochre-deep)}
+.captcha__refresh:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+.captcha__track{position:relative;flex:1;height:44px;border:1px solid var(--hair);border-radius:999px;background:var(--paper);overflow:hidden;touch-action:none;cursor:pointer;outline:none;transition:background .25s,border-color .25s}
+.captcha__track:focus-visible{border-color:var(--ochre);box-shadow:0 0 0 3px rgba(185,141,46,.4)}
+.captcha__track-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:600;font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-55);pointer-events:none;padding-left:2.4rem}
+.captcha__thumb{position:absolute;left:2px;top:2px;width:40px;height:40px;border-radius:999px;border:0;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;cursor:grab;box-shadow:0 2px 6px rgba(20,20,20,.35);will-change:transform}
+.captcha__thumb:active{cursor:grabbing}
+.captcha__track.is-ok{background:var(--ok);border-color:var(--ok);cursor:default}
+.captcha__track.is-ok .captcha__track-label{color:rgba(245,242,234,.95);padding-left:0}
+.captcha__track.is-ok .captcha__thumb{background:rgba(0,0,0,.28);cursor:default}
+.captcha__msg{font-size:.79rem;color:var(--ink-55);margin:.45rem .1rem .05rem;line-height:1.45}
+.captcha__msg.is-error{color:#8a2f1d;font-weight:500}
+.captcha__msg.is-ok{color:var(--ok);font-weight:500}

@@ -73,6 +73,23 @@
         return;
       }
 
+      // puzzle captcha — must be verified before anything else
+      if(form.hasAttribute('data-captcha') && form.dataset.captchaVerified !== '1'){
+        var widget = form.querySelector('[data-captcha-widget]');
+        if(widget){
+          var msgEl = widget.querySelector('.captcha__msg');
+          if(msgEl){
+            msgEl.textContent = 'Please complete the puzzle above before submitting.';
+            msgEl.classList.add('is-error');
+          }
+          widget.classList.add('is-fail');
+          window.setTimeout(function(){ widget.classList.remove('is-fail'); }, 650);
+          var trackEl = widget.querySelector('.captcha__track');
+          if(trackEl) trackEl.focus({preventScroll:false});
+        }
+        return;
+      }
+
       var ok = true;
       form.querySelectorAll('[required]').forEach(function(field){
         var v = (field.value || '').trim();

@@ -29,7 +29,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--body);-webkit-fo
   radial-gradient(circle at 15% 20%, rgba(185,141,46,.14), transparent 45%),
   radial-gradient(circle at 85% 80%, rgba(185,141,46,.12), transparent 45%), var(--paper)}
 .login__card{width:min(420px,100%);background:var(--panel);border:1px solid var(--hair);border-radius:16px;padding:2.25rem 2rem 1.75rem;text-align:center;box-shadow:0 30px 80px rgba(20,20,20,.18)}
-.login__sigil{width:72px;height:72px;margin:0 auto 1.1rem;background:var(--ink);color:var(--paper);border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:600;font-size:1.6rem;letter-spacing:.08em;border-bottom:4px solid var(--ochre)}
+.login__sigil{width:88px;height:88px;margin:0 auto 1.1rem;display:block;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
 .login__eyebrow{font-family:var(--sans);font-weight:600;text-transform:uppercase;letter-spacing:.28em;font-size:.62rem;color:var(--ochre-deep)}
 .login__title{font-family:var(--serif);font-weight:400;text-transform:uppercase;font-size:1.5rem;line-height:1.15;letter-spacing:.02em;margin:.5rem 0 .35rem}
 .login__sub{color:var(--ink-55);font-size:.85rem;margin-bottom:1.4rem}
@@ -47,7 +47,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--body);-webkit-fo
 
 .side{width:264px;flex:0 0 264px;background:var(--ink);color:var(--paper);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;padding:1.4rem 1.1rem 1.1rem}
 .side__brand{display:flex;gap:.7rem;align-items:center;padding:.25rem .35rem 1.1rem;border-bottom:1px solid rgba(245,242,234,.14)}
-.side__sigil{width:46px;height:46px;flex:0 0 46px;background:var(--paper);color:var(--ink);border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:600;border-bottom:3px solid var(--ochre);letter-spacing:.05em}
+.side__sigil{width:46px;height:46px;flex:0 0 46px;display:block;border-radius:9px}
 .side__wordmark{display:flex;flex-direction:column;line-height:1.25;min-width:0}
 .side__wordmark small{font-family:var(--body);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,242,234,.55)}
 .side__wordmark b{font-family:var(--sans);font-weight:500;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase}
@@ -56,8 +56,6 @@ body{background:var(--paper);color:var(--ink);font-family:var(--body);-webkit-fo
 .side__link{display:flex;align-items:center;gap:.7rem;background:none;border:0;color:rgba(245,242,234,.78);text-align:left;padding:.62rem .7rem;border-radius:8px;cursor:pointer;font-family:var(--sans);font-weight:400;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;transition:background .15s,color .15s}
 .side__link:hover{background:rgba(245,242,234,.08);color:var(--paper)}
 .side__link.is-active{background:var(--paper);color:var(--ink)}
-.side__num{font-family:var(--mono);font-size:.62rem;color:var(--ochre);opacity:.9}
-.side__link.is-active .side__num{color:var(--ochre-deep)}
 .side__badge{margin-left:auto;background:var(--ochre);color:var(--ink);border-radius:999px;min-width:22px;height:20px;padding:0 6px;font-size:.62rem;display:flex;align-items:center;justify-content:center;font-weight:600}
 
 .side__foot{border-top:1px solid rgba(245,242,234,.14);padding-top:.9rem;display:flex;flex-direction:column;gap:.6rem}
@@ -234,7 +232,6 @@ body{background:var(--paper);color:var(--ink);font-family:var(--body);-webkit-fo
   .side__brand{border:0;padding:0}
   .side__nav{flex-direction:row;flex-wrap:wrap;margin:0;flex:1 1 auto;overflow:visible}
   .side__link{padding:.45rem .55rem;font-size:.62rem}
-  .side__num{display:none}
   .side__foot{border:0;padding:0;flex-direction:row;align-items:center;margin-left:auto}
   .side__view-site{display:none}
   .side__email{display:none}
@@ -268,3 +265,10 @@ body{background:var(--paper);color:var(--ink);font-family:var(--body);-webkit-fo
 .inv-doc__notes{font-size:11px;color:#444;border-top:1px solid #e2ded0;padding-top:10px;margin-bottom:16px;white-space:pre-wrap}
 .inv-doc__foot{border-top:3px solid #141414;padding-top:10px;font-size:9.5px;color:#555;display:flex;justify-content:space-between;gap:16px}
 .inv-doc__foot b{color:#141414}
+
+/* icon system */
+.sicon{display:inline-flex;flex:0 0 auto}
+.sicon svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
+.side__link.is-active .sicon svg{opacity:1}
+.side__view-site svg,.linkbtn svg,.btn-ink svg,.btn-ghost svg,.mini-btn svg{width:.95em;height:.95em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.09em;display:inline-block}
+.side__link{display:flex;align-items:center;gap:.6rem}

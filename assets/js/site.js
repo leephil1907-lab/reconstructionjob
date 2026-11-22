@@ -185,7 +185,7 @@
       + '<span class="batch">' + esc(t.batch) + (t.zip ? ' · ZIP ' + esc(t.zip) : '') + '</span>'
       + '<h3>' + esc(t.city) + '</h3>'
       + '<p>' + esc(t.county || t.state) + '</p>'
-      + '<span class="foot"><span>' + esc(t.state) + '</span><i>Open →</i></span>'
+      + '<span class="foot"><span>' + esc(t.state) + '</span><i>Open <svg class="ic" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></i></span>'
       + '</a>';
   }
 
@@ -196,7 +196,7 @@
     var slug = (window.RC_PRERENDER_SLUG || params.get('slug') || window.location.hash.replace('#','') || '').toLowerCase();
     var t = DATA.filter(function(x){ return x.slug === slug; })[0];
     if(!t){
-      td.innerHTML = '<div class="wrap" style="padding:4rem 0"><p class="eyebrow">Territory</p><h1 style="font-size:2.5rem;font-weight:400;margin:.75rem 0 1rem">We’re preparing this territory page.</h1><p style="color:var(--ink-70);max-width:36rem;line-height:1.6">This location has not been reviewed and published yet. Request your town and we will let you know when a local page is ready.</p><a class="btn btn--solid btn--lg" style="margin-top:1.5rem" href="my-town.html">Request your town <span class="arr">↗</span></a></div>';
+      td.innerHTML = '<div class="wrap" style="padding:4rem 0"><p class="eyebrow">Territory</p><h1 style="font-size:2.5rem;font-weight:400;margin:.75rem 0 1rem">We’re preparing this territory page.</h1><p style="color:var(--ink-70);max-width:36rem;line-height:1.6">This location has not been reviewed and published yet. Request your town and we will let you know when a local page is ready.</p><a class="btn btn--solid btn--lg" style="margin-top:1.5rem" href="my-town.html">Request your town <span class="arr"><svg class="ic" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></svg></span></a></div>';
     }else{
       document.title = t.city + ', ' + t.state + ' — The Reconstruction Company';
       var siblings = DATA.filter(function(x){ return x.state === t.state && x.slug !== t.slug; }).slice(0,6);
@@ -205,7 +205,7 @@
       if(siblings.length){ sibHead = 'More in ' + t.state; sibItems = siblings; }
       else if(sameBatch.length){ sibHead = 'More from ' + (t.batch === 'Town Page' ? 'the town pages' : t.batch); sibItems = sameBatch; }
       var sibList = sibItems ? sibItems.map(function(s){
-        return '<a href="territory.html?slug=' + encodeURIComponent(s.slug) + '"><span>' + esc(s.city) + '</span><span aria-hidden="true">→</span></a>';
+        return '<a href="territory.html?slug=' + encodeURIComponent(s.slug) + '"><span>' + esc(s.city) + '</span><span aria-hidden="true" class="td-arrow"><svg class="ic" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></span></a>';
       }).join('') : '';
       td.innerHTML =
         '<div class="wrap"><div class="td-grid page-anim">'
@@ -222,13 +222,13 @@
         +   '</div>'
         +   '<div class="callout"><strong>What this is.</strong> An educational, location-based starting point for the local Opportunity Zone context around ' + esc(t.city) + '. Designations are made census-tract by census-tract — a ZIP code is not an Opportunity Zone, and this page is not an eligibility determination for any property or address.</div>'
         +   '<p style="margin:1.25rem 0;line-height:1.7;color:var(--ink-70)">' + esc(t.label) + '. Reconstruction USA is preparing community-focused agent experiences for local areas; visiting this page does not enroll you in any program, service, or offering.</p>'
-        +   (t.resourceUrl ? '<a class="btn btn--ghost" href="' + esc(t.resourceUrl) + '" target="_blank" rel="noopener noreferrer">Official Opportunity Zone resource <span class="arr">↗</span></a>' : '')
-        +   '<div class="cta-row" style="margin-top:1.5rem"><a class="btn btn--solid" href="my-town.html">Request your town <span class="arr">↗</span></a><a class="btn btn--ghost" href="join-the-team.html">Join the team <span class="arr">↗</span></a></div>'
+        +   (t.resourceUrl ? '<a class="btn btn--ghost" href="' + esc(t.resourceUrl) + '" target="_blank" rel="noopener noreferrer">Official Opportunity Zone resource <span class="arr"><svg class="ic" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></svg></span></a>' : '')
+        +   '<div class="cta-row" style="margin-top:1.5rem"><a class="btn btn--solid" href="my-town.html">Request your town <span class="arr"><svg class="ic" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></svg></span></a><a class="btn btn--ghost" href="join-the-team.html">Join the team <span class="arr"><svg class="ic" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></svg></span></a></div>'
         +   '<p class="disclaimer">This page is informational only and is not investment, tax, legal, or financial advice, and not an offering of securities. It is not a property listing, an agent claim, or an Opportunity Zone determination. Opportunity Zone designations shown by public sources reflect original designations (December 2019) unless a state program states otherwise. Always verify a specific address with the official census tract and the relevant state program before acting.</p>'
         + '</article>'
         + '<aside>'
         +   (sibList ? '<div class="side-box"><h3>' + esc(sibHead) + '</h3>' + sibList + '</div>' : '')
-        +   '<div class="side-box"><h3>Next steps</h3><a href="my-town.html"><span>Request your town</span><span>→</span></a><a href="join-the-team.html"><span>Request guide access</span><span>→</span></a><a href="faq.html"><span>Read the FAQ</span><span>→</span></a></div>'
+        +   '<div class="side-box"><h3>Next steps</h3><a href="my-town.html"><span>Request your town</span><span class="side-arrow"><svg class="ic" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></span></a><a href="join-the-team.html"><span>Request guide access</span><span class="side-arrow"><svg class="ic" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></span></a><a href="faq.html"><span>Read the FAQ</span><span class="side-arrow"><svg class="ic" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></span></a></div>'
         +   '<div class="side-box"><h3>Reference point</h3><p class="mono" style="line-height:1.9">LAT ' + t.lat.toFixed(4) + '<br>LNG ' + t.lng.toFixed(4) + '<br>ZOOM ' + (t.zoom || 11) + '</p></div>'
         + '</aside>'
         + '</div></div>';

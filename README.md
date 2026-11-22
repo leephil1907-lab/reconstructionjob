@@ -6,8 +6,10 @@ Public multi-page website and private admin console for The Reconstruction Compa
 
 ## Stack
 - Static HTML / CSS / vanilla JS — no build step
+- Inline-SVG icon system (no icon fonts, no external requests)
 - Supabase (Postgres + Auth + REST/RPC) for forms, live chat, invoices, email log
-- Vercel (auto-deploys `main` on every push)
+- Forms are protected by a Bybit-style jigsaw puzzle captcha (self-contained canvas artwork, no third-party widget); submissions also pass a honeypot
+- Vercel (static; production deployment is created from `main` — project has Git auto-deploys disabled)
 
 ## Layout
 ```
@@ -24,7 +26,7 @@ sitemap.xml robots.txt  Discovery (admin/ is disallowed)
 Any static server, e.g. `python3 -m http.server 8090` (or `npx serve .`).
 
 ## Deploy
-Push to `main`. Vercel serves the repo root as static output — keep `vercel.json` (clean URLs). No build error is possible from stray files; keep `territory/` and `build.js` out of the repo (see `.gitignore`).
+Push to `main`. The repo root is served as static output — keep `vercel.json` (clean URLs). No build error is possible from stray files; keep `territory/` and `build.js` out of the repo (see `.gitignore`).
 
 ## Admin console
 `/admin` — email + password (Supabase Auth, single account, public signup disabled).
@@ -33,4 +35,4 @@ Features: dashboard · live chat (reply as the Company, close/reopen/delete) · 
 `assets/js/config.js` holds only browser-safe values (the Supabase **anon** key + project URL). All privileged reads/writes require the admin session; public data is limited to insert-only form leads and security-definer chat RPCs.
 
 ## Correspondence
-reconstructionusa@proton.me
+buildwithbruno@hotmail.com

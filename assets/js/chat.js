@@ -68,7 +68,7 @@
   panel.hidden = true;
   panel.innerHTML =
     '<div class="rc-chat__head">' +
-      '<div class="rc-chat__sigil" aria-hidden="true">RC</div>' +
+      '<div class="rc-chat__sigil">' + '<svg class="rc-chat__sigil-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="10" fill="#f5f2ea"/><text x="32" y="30" text-anchor="middle" dominant-baseline="central" font-family="Georgia,Times New Roman,serif" font-size="25" letter-spacing="1.5" fill="#141414">RC</text><rect x="13" y="43" width="38" height="3.4" fill="#b98d2e"/></svg>' + '</div>' +
       '<div class="rc-chat__head-text"><b>Talk with the Company</b><span>Usually replies within a day</span></div>' +
       '<button class="rc-chat__close" type="button" aria-label="Close chat">&times;</button>' +
     '</div>' +
@@ -249,7 +249,7 @@
   function showError(){
     var note = document.createElement('p');
     note.className = 'rc-chat__error';
-    note.textContent = "Couldn't reach us just now. Try again, or email reconstructionusa@proton.me.";
+    note.textContent = "Couldn't reach us just now. Try again, or email buildwithbruno@hotmail.com.";
     var composerEl = composer;
     composerEl.parentElement.insertBefore(note, composerEl);
     setTimeout(function(){ if(note.parentElement) note.parentElement.removeChild(note); }, 5000);
