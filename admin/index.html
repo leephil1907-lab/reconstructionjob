@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Console — The Reconstruction Company</title>
+<meta name="description" content="Restricted administration console for The Reconstruction Company.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#141414">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- ============ LOGIN VIEW ============ -->
+<div id="loginView" class="login">
+  <form id="loginForm" class="login__card" autocomplete="on">
+    <div class="login__sigil" aria-hidden="true">RC</div>
+    <p class="login__eyebrow">Restricted area</p>
+    <h1 class="login__title">The Reconstruction<br>Company</h1>
+    <p class="login__sub">Admin Console — authorised personnel only.</p>
+    <label class="login__label" for="loginEmail">Email</label>
+    <input id="loginEmail" class="login__input" type="email" required autocomplete="username" placeholder="reconstructionusa@proton.me">
+    <label class="login__label" for="loginPassword">Password</label>
+    <input id="loginPassword" class="login__input" type="password" required autocomplete="current-password" placeholder="••••••••••••••••">
+    <p id="loginError" class="login__error" role="alert" hidden></p>
+    <button type="submit" id="loginBtn" class="login__btn"><span class="login__btn-label">Sign in</span></button>
+    <p class="login__foot">This console is not linked from the public site. Activity here is yours alone.</p>
+  </form>
+</div>
+
+<!-- ============ APP VIEW ============ -->
+<div id="appView" class="app" hidden>
+
+  <aside class="side">
+    <div class="side__brand">
+      <div class="side__sigil" aria-hidden="true">RC</div>
+      <div class="side__wordmark">
+        <small>The Reconstruction Company</small>
+        <b>Admin Console</b>
+      </div>
+    </div>
+
+    <nav class="side__nav" aria-label="Admin sections">
+      <button class="side__link is-active" data-tab="dashboard"><span class="side__num">01</span> Dashboard</button>
+      <button class="side__link" data-tab="chat"><span class="side__num">02</span> Live Chat <span class="side__badge" id="badgeChat" hidden></span></button>
+      <button class="side__link" data-tab="submissions"><span class="side__num">03</span> Submissions <span class="side__badge" id="badgeSubs" hidden></span></button>
+      <button class="side__link" data-tab="invoices"><span class="side__num">04</span> Invoices</button>
+      <button class="side__link" data-tab="email"><span class="side__num">05</span> Email Reply</button>
+      <button class="side__link" data-tab="settings"><span class="side__num">06</span> Settings</button>
+    </nav>
+
+    <div class="side__foot">
+      <a class="side__view-site" href="../index.html" target="_blank" rel="noopener">View site ↗</a>
+      <div class="side__account">
+        <span id="accountEmail" class="side__email">—</span>
+        <button id="signOutBtn" class="side__signout" type="button">Sign out</button>
+      </div>
+    </div>
+  </aside>
+
+  <main class="content">
+
+    <!-- ===== TAB: DASHBOARD ===== -->
+    <section class="tab is-active" id="tab-dashboard" aria-labelledby="h-dashboard">
+      <header class="pagehead">
+        <p class="eyebrow">Overview</p>
+        <h2 id="h-dashboard">Good to see you.</h2>
+        <p class="pagehead__sub">Everything submitted to the Company, wired to one desk.</p>
+      </header>
+
+      <div class="stats" id="dashStats">
+        <article class="stat"><span class="stat__label">New leads</span><b class="stat__num" id="statNewSubs">–</b><span class="stat__hint">Awaiting your review</span></article>
+        <article class="stat"><span class="stat__label">Open chats</span><b class="stat__num" id="statOpenChats">–</b><span class="stat__hint">Visitors waiting on you</span></article>
+        <article class="stat"><span class="stat__label">Outstanding</span><b class="stat__num" id="statOutstanding">–</b><span class="stat__hint">Sent, unpaid invoices</span></article>
+        <article class="stat"><span class="stat__label">Collected</span><b class="stat__num" id="statPaid">–</b><span class="stat__hint">Paid invoices, all time</span></article>
+      </div>
+
+      <div class="dash-grid">
+        <div class="card">
+          <div class="card__head"><h3>Needs attention</h3><button class="linkbtn" data-goto="submissions">Open inbox →</button></div>
+          <ul id="dashLeads" class="dash-list"><li class="dash-list__empty">Loading…</li></ul>
+        </div>
+        <div class="card">
+          <div class="card__head"><h3>Latest messages</h3><button class="linkbtn" data-goto="chat">Open chat →</button></div>
+          <ul id="dashChats" class="dash-list"><li class="dash-list__empty">Loading…</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TAB: CHAT ===== -->
+    <section class="tab" id="tab-chat" aria-labelledby="h-chat" hidden>
+      <header class="pagehead">
+        <p class="eyebrow">Live chat</p>
+        <h2 id="h-chat">The front desk.</h2>
+        <p class="pagehead__sub">Visitors chat from the public site; you answer here. Updates automatically.</p>
+      </header>
+
+      <div class="chat-layout">
+        <div class="card chat-list-card">
+          <div class="card__head"><h3>Conversations</h3><button id="chatRefreshBtn" class="linkbtn" type="button">Refresh ↻</button></div>
+          <ul id="chatThreadList" class="thread-list"><li class="dash-list__empty">Loading…</li></ul>
+        </div>
+
+        <div class="card chat-detail-card" id="chatDetailCard">
+          <div class="chat-detail__empty" id="chatDetailEmpty">
+            <p><b>Select a conversation.</b><br>Reply as the Company — visitors see your name as “The Reconstruction Company”.</p>
+          </div>
+          <div class="chat-detail" id="chatDetail" hidden>
+            <div class="chat-detail__head">
+              <div>
+                <b id="chatVisitorName">—</b>
+                <span id="chatVisitorEmail" class="chat-detail__email">—</span>
+              </div>
+              <div class="chat-detail__actions">
+                <span id="chatThreadStatus" class="pill pill--open">open</span>
+                <button id="chatToggleStatusBtn" class="mini-btn" type="button">Close</button>
+                <button id="chatDeleteBtn" class="mini-btn mini-btn--danger" type="button">Delete</button>
+              </div>
+            </div>
+            <div id="chatMessages" class="chat-messages" aria-live="polite"></div>
+            <form id="chatReplyForm" class="chat-reply">
+              <textarea id="chatReplyBody" required rows="2" maxlength="2000" placeholder="Write your reply…" aria-label="Reply"></textarea>
+              <button type="submit" class="btn-ink" id="chatReplySend">Send reply</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TAB: SUBMISSIONS ===== -->
+    <section class="tab" id="tab-submissions" aria-labelledby="h-subs" hidden>
+      <header class="pagehead pagehead--row">
+        <div>
+          <p class="eyebrow">Form inbox</p>
+          <h2 id="h-subs">Submissions.</h2>
+          <p class="pagehead__sub">My Town requests and guide-access applications. Nothing is lost; everything is exportable.</p>
+        </div>
+        <div class="pagehead__tools">
+          <button id="subsExportBtn" class="btn-ghost" type="button">Export CSV</button>
+          <button id="subsRefreshBtn" class="btn-ink" type="button">Refresh ↻</button>
+        </div>
+      </header>
+
+      <div class="toolbar" role="toolbar" aria-label="Filters">
+        <div class="seg" id="subsKindSeg">
+          <button class="seg__btn is-active" data-kind="all">All</button>
+          <button class="seg__btn" data-kind="my-town">My Town</button>
+          <button class="seg__btn" data-kind="invoice">Guide-access</button>
+        </div>
+        <div class="seg" id="subsStatusSeg">
+          <button class="seg__btn is-active" data-status="all">Any status</button>
+          <button class="seg__btn" data-status="new">New</button>
+          <button class="seg__btn" data-status="handled">Handled</button>
+          <button class="seg__btn" data-status="archived">Archived</button>
+        </div>
+      </div>
+
+      <div class="card table-card">
+        <table class="table" id="subsTable">
+          <thead><tr><th>Received</th><th>Type</th><th>Name</th><th>Detail</th><th>Reference</th><th>Status</th><th><span class="visually-hidden">Actions</span></th></tr></thead>
+          <tbody id="subsTbody"><tr><td colspan="7" class="table__empty">Loading…</td></tr></tbody>
+        </table>
+      </div>
+
+      <div class="drawer" id="subsDrawer" hidden aria-hidden="true">
+        <div class="drawer__panel" role="dialog" aria-label="Submission details">
+          <div class="drawer__head">
+            <h3 id="drawerTitle">Submission</h3>
+            <button id="drawerCloseBtn" class="linkbtn" type="button">Close ✕</button>
+          </div>
+          <dl class="drawer__meta" id="drawerMeta"></dl>
+          <div class="drawer__actions">
+            <button id="drawerMailBtn" class="btn-ink" type="button">Reply by email</button>
+            <button id="drawerHandleBtn" class="btn-ghost" type="button">Mark handled</button>
+            <button id="drawerArchiveBtn" class="btn-ghost" type="button">Archive</button>
+            <button id="drawerDeleteBtn" class="btn-ghost btn-ghost--danger" type="button">Delete</button>
+          </div>
+        </div>
+        <button class="drawer__scrim" id="drawerScrim" aria-label="Close details"></button>
+      </div>
+    </section>
+
+    <!-- ===== TAB: INVOICES ===== -->
+    <section class="tab" id="tab-invoices" aria-labelledby="h-inv" hidden>
+      <header class="pagehead pagehead--row">
+        <div>
+          <p class="eyebrow">Guide-access invoices</p>
+          <h2 id="h-inv">Invoice creator.</h2>
+          <p class="pagehead__sub">Branded, one-click printing. Numbers persist — no duplicates.</p>
+        </div>
+        <div class="pagehead__tools">
+          <button id="invNewBtn" class="btn-ghost" type="button">New invoice</button>
+          <button id="invPrintBtn" class="btn-ink" type="button">Print / Save PDF</button>
+        </div>
+      </header>
+
+      <div class="invoice-grid">
+        <form id="invoiceForm" class="card form-card" autocomplete="off">
+          <input type="hidden" id="invId">
+          <div class="form-row">
+            <label class="field"><span>Invoice number</span><input id="invNumber" required maxlength="40"></label>
+            <label class="field field--sm"><span>Status</span><select id="invStatus"><option value="draft">Draft</option><option value="sent">Sent</option><option value="paid">Paid</option><option value="void">Void</option></select></label>
+          </div>
+          <label class="field"><span>Bill to — name</span><input id="invClientName" required maxlength="160" placeholder="Jane Doe"></label>
+          <div class="form-row">
+            <label class="field"><span>Bill to — email</span><input id="invClientEmail" type="email" maxlength="160" placeholder="jane@example.com"></label>
+            <label class="field"><span>Bill to — address</span><input id="invClientAddress" maxlength="300" placeholder="Street, City, State ZIP"></label>
+          </div>
+          <div class="form-row">
+            <label class="field"><span>Issue date</span><input id="invIssueDate" type="date" required></label>
+            <label class="field"><span>Due date</span><input id="invDueDate" type="date"></label>
+          </div>
+
+          <div class="items">
+            <div class="items__head"><span>Description</span><span>Qty</span><span>Rate ($)</span><span>Amount</span><span></span></div>
+            <div id="invItems"></div>
+            <button type="button" id="invAddItemBtn" class="linkbtn items__add">+ Add line item</button>
+          </div>
+
+          <div class="form-row form-row--totals">
+            <label class="field field--sm"><span>Tax %</span><input id="invTaxRate" type="number" min="0" max="100" step="0.01" value="0"></label>
+            <label class="field field--sm"><span>Discount ($)</span><input id="invDiscount" type="number" min="0" step="0.01" value="0"></label>
+          </div>
+          <label class="field"><span>Notes / payment instructions</span><textarea id="invNotes" rows="2" maxlength="800" placeholder="One-time US$1,000 guide access. Due on receipt. Reference invoice number with payment."></textarea></label>
+          <p class="form-error" id="invError" role="alert" hidden></p>
+          <div class="form-actions">
+            <button type="submit" class="btn-ink" id="invSaveBtn">Save invoice</button>
+            <button type="button" class="btn-ghost" id="invEmailBtn">Email via console →</button>
+          </div>
+        </form>
+
+        <div class="card preview-card" aria-label="Invoice preview">
+          <div id="invoicePreview" class="invoice-preview"></div>
+        </div>
+      </div>
+
+      <div class="card table-card invoice-list-card">
+        <div class="card__head"><h3>All invoices</h3><span class="muted" id="invListCount"></span></div>
+        <div class="table-scroll">
+          <table class="table" id="invTable">
+            <thead><tr><th>Number</th><th>Client</th><th>Issued</th><th>Total</th><th>Status</th><th><span class="visually-hidden">Actions</span></th></tr></thead>
+            <tbody id="invTbody"><tr><td colspan="6" class="table__empty">Loading…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TAB: EMAIL ===== -->
+    <section class="tab" id="tab-email" aria-labelledby="h-email" hidden>
+      <header class="pagehead">
+        <p class="eyebrow">Correspondence</p>
+        <h2 id="h-email">Email reply.</h2>
+        <p class="pagehead__sub">Write once — send branded, or copy the branded HTML straight into your mail app. Every send is logged.</p>
+      </header>
+
+      <div class="email-grid">
+        <form id="emailForm" class="card form-card" autocomplete="off">
+          <div class="form-row">
+            <label class="field"><span>To — name</span><input id="emToName" maxlength="160" placeholder="Jane Doe"></label>
+            <label class="field"><span>To — email</span><input id="emToEmail" type="email" required maxlength="160" placeholder="jane@example.com"></label>
+          </div>
+          <label class="field"><span>Subject</span><input id="emSubject" required maxlength="240" placeholder="The Reconstruction Company — your request"></label>
+          <label class="field"><span>Template</span>
+            <select id="emTemplate">
+              <option value="blank">Blank</option>
+              <option value="received">We received your request</option>
+              <option value="invoice">Your guide-access invoice</option>
+              <option value="thanks">Thank you</option>
+              <option value="schedule">Schedule a conversation</option>
+              <option value="town-ready">Your town page is ready</option>
+            </select>
+          </label>
+          <label class="field"><span>Message</span><textarea id="emBody" required rows="10" maxlength="5000" placeholder="Write your message…"></textarea></label>
+          <label class="check"><input id="emLog" type="checkbox" checked> Log this email in the sent log</label>
+          <div class="form-actions">
+            <button type="button" class="btn-ink" id="emMailtoBtn">Open in mail app</button>
+            <button type="button" class="btn-ghost" id="emCopyHtmlBtn">Copy branded HTML</button>
+            <button type="button" class="btn-ghost" id="emCopyTextBtn">Copy text</button>
+          </div>
+        </form>
+
+        <div class="card preview-card" aria-label="Email preview">
+          <div id="emailPreview" class="email-preview"></div>
+        </div>
+      </div>
+
+      <div class="card table-card">
+        <div class="card__head"><h3>Sent log</h3><button id="emLogRefreshBtn" class="linkbtn" type="button">Refresh ↻</button></div>
+        <div class="table-scroll">
+          <table class="table" id="emLogTable">
+            <thead><tr><th>Sent</th><th>To</th><th>Subject</th><th>Template</th><th><span class="visually-hidden">Actions</span></th></tr></thead>
+            <tbody id="emLogTbody"><tr><td colspan="5" class="table__empty">Loading…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TAB: SETTINGS ===== -->
+    <section class="tab" id="tab-settings" aria-labelledby="h-set" hidden>
+      <header class="pagehead">
+        <p class="eyebrow">Control room</p>
+        <h2 id="h-set">Settings.</h2>
+        <p class="pagehead__sub">Site-wide switches, your account, and your data.</p>
+      </header>
+
+      <div class="settings-grid">
+        <div class="card form-card">
+          <h3 class="card__title">Announcement bar</h3>
+          <p class="muted">Shown above the navigation on every public page. Dismissible by visitors, per session.</p>
+          <label class="check check--switch"><input id="setAnnounceEnabled" type="checkbox"> Enable announcement</label>
+          <label class="field"><span>Announcement text</span><input id="setAnnounceText" maxlength="180" placeholder="First Batch open — 9 territories. Applications close soon."></label>
+          <div class="form-actions"><button id="setAnnounceSaveBtn" class="btn-ink" type="button">Save announcement</button></div>
+        </div>
+
+        <div class="card form-card">
+          <h3 class="card__title">Your password</h3>
+          <p class="muted">Signed in as <b id="setAccountEmail">—</b>. Minimum 8 characters.</p>
+          <label class="field"><span>New password</span><input id="setNewPassword" type="password" autocomplete="new-password" minlength="8" maxlength="128"></label>
+          <label class="field"><span>Confirm new password</span><input id="setConfirmPassword" type="password" autocomplete="new-password" minlength="8" maxlength="128"></label>
+          <div class="form-actions"><button id="setPasswordSaveBtn" class="btn-ink" type="button">Update password</button></div>
+        </div>
+
+        <div class="card form-card">
+          <h3 class="card__title">Data &amp; export</h3>
+          <p class="muted">Download a complete JSON backup: submissions, chats, invoices, email log and settings.</p>
+          <div class="form-actions"><button id="setExportBtn" class="btn-ghost" type="button">Download all data (JSON)</button></div>
+        </div>
+
+        <div class="card form-card danger">
+          <h3 class="card__title">Danger zone</h3>
+          <p class="muted">Irreversible. Type-checked confirmations required.</p>
+          <div class="form-actions">
+            <button id="setClearSubsBtn" class="btn-ghost btn-ghost--danger" type="button">Delete all submissions…</button>
+            <button id="setClearEmailLogBtn" class="btn-ghost btn-ghost--danger" type="button">Clear email log…</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ============ TOAST ============ -->
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<!-- ============ PRINT-ONLY INVOICE ============ -->
+<div id="invoice-print" aria-hidden="true"></div>
+
+<script src="../assets/js/config.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

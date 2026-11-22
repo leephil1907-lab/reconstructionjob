@@ -1,0 +1,9 @@
+# Dead/stale files — not part of the deployable site
+territory/
+build.js
+
+# Tooling noise
+node_modules/
+*.log
+.DS_Store
+.vercel

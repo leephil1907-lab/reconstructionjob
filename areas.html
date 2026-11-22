@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Territory Directory — The Reconstruction Company</title>
+<meta name="description" content="Browse all 50 indexed territory reference points across 24 states — First Batch, Batch 2, Batch 3, featured areas, and published town pages.">
+<link rel="canonical" href="https://reconstructionjob-earl-lee-s-projects.vercel.app/areas">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Reconstruction Company">
+<meta property="og:title" content="Territory Directory — The Reconstruction Company">
+<meta property="og:description" content="Browse all 50 indexed territory reference points across 24 states — First Batch, Batch 2, Batch 3, featured areas, and published town pages.">
+<meta property="og:url" content="https://reconstructionjob-earl-lee-s-projects.vercel.app/areas">
+<meta property="og:image" content="https://reconstructionjob-earl-lee-s-projects.vercel.app/assets/img/og.jpg">
+<meta property="og:image:width" content="1568">
+<meta property="og:image:height" content="818">
+<meta name="twitter:image" content="https://reconstructionjob-earl-lee-s-projects.vercel.app/assets/img/og.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Territory Directory — The Reconstruction Company">
+<meta name="twitter:description" content="Browse all 50 indexed territory reference points across 24 states — First Batch, Batch 2, Batch 3, featured areas, and published town pages.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#f5f2ea">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<div class="page">
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__inner">
+    <span><i>◆</i> <b>50</b> territories indexed · <b>24</b> states &amp; regions</span>
+    <span><i>◆</i> First Batch open — <b>9</b> reviewed territories</span>
+    <span><i>◆</i> Search a town, county, ZIP, or state</span>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="masthead__in">
+    <a class="wordmark" href="index.html" aria-label="The Reconstruction Company — home">
+      <small>Public Benefit · Real Assets</small>
+      <b>The Reconstruction Company</b>
+    </a>
+    <nav aria-label="Primary">
+      <ul class="nav">
+        <li><a href="areas.html" aria-current="page">Territories</a></li>
+        <li><a href="approach.html">Our Approach</a></li>
+        <li><a href="library.html">Library</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+    </nav>
+    <div class="mast-cta">
+      <a class="btn btn--solid" href="join-the-team.html">Join the Team <span class="arr">↗</span></a>
+      <button class="hamburger" aria-expanded="false" aria-controls="mobile-panel" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-panel" id="mobile-panel">
+    <a href="index.html">Home</a>
+    <a href="areas.html">Territory Directory</a>
+    <a href="approach.html">Our Approach</a>
+    <a href="library.html">Library &amp; Resources</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="faq.html">FAQ</a>
+    <div class="row">
+      <a class="btn btn--ghost" href="my-town.html" style="flex:1;justify-content:center">My Town</a>
+      <a class="btn btn--solid" href="join-the-team.html" style="flex:1;justify-content:center">Join the Team</a>
+    </div>
+  </div>
+</header>
+
+<main class="page-anim">
+
+<section class="page-hero">
+  <div class="wrap">
+    <nav class="crumbs"><a href="index.html">Home</a><span>/</span><span aria-current="page">Territory Directory</span></nav>
+    <p class="eyebrow eyebrow--ochre reveal">Index · Fifty Reference Points</p>
+    <h1 class="reveal" style="--d:80ms">Territory<br>Directory</h1>
+    <p class="lede reveal" style="--d:160ms">Every indexed territory, filterable — reviewed Opportunity Zone contexts with approximate reference points and official resource links. A marker is a starting point for research, not an eligibility determination.</p>
+  </div>
+</section>
+
+<section class="section" id="map" aria-labelledby="map-h">
+  <div class="wrap">
+    <div class="map-panel reveal">
+      <div class="map-panel__head">
+        <h3 id="map-h">The Index at a Glance</h3>
+        <span class="mono" style="color:var(--ink-55)">SELECT ANY MARKER</span>
+      </div>
+      <div class="map-wrap" id="territory-map"></div>
+      <div class="map-foot">
+        <span>Markers are approximate reference points, not boundaries or determinations.</span>
+        <a href="#directory">Skip to list ↓</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="directory" aria-label="Directory">
+  <div class="wrap">
+    <div class="searchbar reveal" role="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input id="dir-search" type="search" placeholder="Search town, county, ZIP, slug, or state…" aria-label="Search territories" autocomplete="off">
+    </div>
+    <div class="filters reveal" role="group" aria-label="Filter by batch" style="--d:80ms">
+      <button class="chip" data-batch="All" aria-pressed="true">All · 50</button>
+      <button class="chip" data-batch="Featured" aria-pressed="false">Featured · 7</button>
+      <button class="chip" data-batch="First Batch" aria-pressed="false">First Batch · 9</button>
+      <button class="chip" data-batch="Batch 2" aria-pressed="false">Batch 2 · 13</button>
+      <button class="chip" data-batch="Batch 3" aria-pressed="false">Batch 3 · 8</button>
+      <button class="chip" data-batch="Town Page" aria-pressed="false">Town Pages · 13</button>
+    </div>
+    <div class="filters reveal" style="--d:120ms;align-items:center">
+      <label class="eyebrow" for="dir-state" style="margin:0">State</label>
+      <select id="dir-state" class="mono" style="padding:.55rem .7rem;border:1px solid var(--hair);border-radius:2px;background:#fff">
+        <option value="">All states</option>
+      </select>
+      <span class="dir-count" id="dir-count" aria-live="polite"></span>
+    </div>
+    <div class="directory" id="directory-grid"></div>
+    <div class="empty" id="dir-empty">
+      <p class="eyebrow" style="margin-bottom:.6rem">No matches</p>
+      <p>Nothing indexed for that search yet.<br><a href="my-town.html" style="border-bottom:1px solid var(--ochre);text-decoration:none;color:var(--ochre-deep)">Request your town →</a></p>
+    </div>
+    <p class="disclaimer">Every marker and card above is a research starting point. Opportunity Zone designations are determined by census tract — never by ZIP code, city limit, or this directory. Verify any specific address against the official state or federal tract list before acting. Nothing here is investment, tax, legal, or financial advice, and nothing on this page is an offering.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="colophon">
+  <div class="colophon__top">
+    <div>
+      <div class="big">The Reconstruction<br>Company</div>
+      <p class="mission">A public-benefit approach to real assets and open source capital formation — serving American towns through reviewed, place-specific Opportunity Zone context.</p>
+    </div>
+    <div>
+      <h4>Territories</h4>
+      <ul>
+        <li><a href="areas.html">Territory directory</a></li>
+        <li><a href="areas.html">First Batch — 9 areas</a></li>
+        <li><a href="areas.html">Batch 2 — 13 areas</a></li>
+        <li><a href="areas.html">Batch 3 — 8 areas</a></li>
+        <li><a href="my-town.html">Request your town</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="approach.html">Our Approach</a></li>
+        <li><a href="library.html">Library &amp; resources</a></li>
+        <li><a href="glossary.html">Glossary</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="join-the-team.html">Join the team</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Correspondence</h4>
+      <ul>
+        <li><a href="mailto:reconstructionusa@proton.me">reconstructionusa@proton.me</a></li>
+        <li><a href="join-the-team.html">Guide-access invoices</a></li>
+        <li><a href="privacy.html">Privacy notice</a></li>
+        <li><a href="terms.html">Terms of use</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="colophon__bar">
+    <span>© <span data-year>2026</span> The Reconstruction Company · Reconstruction USA. All rights reserved.</span>
+    <nav>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="faq.html">Not investment advice</a>
+    </nav>
+  </div>
+</footer>
+
+</div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/announce.js"></script>
+<script src="assets/js/chat.js"></script>
+</body>
+</html>
